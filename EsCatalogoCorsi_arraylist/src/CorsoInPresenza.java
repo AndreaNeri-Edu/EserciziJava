@@ -10,8 +10,10 @@ public class CorsoInPresenza extends Corso {
         this.indirizzo = indirizzo;
     }
 
+    public void setIndirizzo(String indirizzo) { this.indirizzo = indirizzo; }
+
     @Override
     public String descrivi() {
-        return "Nome corso: "+nome+" Docente: "+docente+" Durata: "+durataOre+" Indirizzo: "+indirizzo;
+        return "Nome corso: "+nome+"\nDocente: "+docente+"\nDurata: "+durataOre+"\nIndirizzo: "+indirizzo;
     }
 }

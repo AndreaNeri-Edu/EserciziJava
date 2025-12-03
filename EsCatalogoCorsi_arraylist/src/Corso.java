@@ -19,5 +19,9 @@ public abstract class Corso {
         this.durataOre = durataOreNuovo;
     }
 
+    public void setNome(String nome) { this.nome = nome; }
+    public void setDocente(String docente) { this.docente = docente; }
+    public void setDurataOre(int durataOre) { this.durataOre = durataOre; }
+
     public abstract String descrivi();
 }

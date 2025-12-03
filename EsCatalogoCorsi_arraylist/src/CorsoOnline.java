@@ -11,8 +11,11 @@ public class CorsoOnline extends Corso {
         this.live = live;
     }
 
+    public void setPiattaforma(String piattaforma) { this.piattaforma = piattaforma; }
+    public void setLive(boolean live) { this.live = live; }
+
     @Override
     public String descrivi() {
-        return "Nome corso: "+nome+" Docente: "+docente+" Durata: "+durataOre+" Piattaforma: "+piattaforma+" Live: "+live;
+        return "Nome corso: "+nome+"\nDocente: "+docente+"\nDurata: "+durataOre+"\nPiattaforma: "+piattaforma+"\nLive: "+live;
     }
 }
