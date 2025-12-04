@@ -16,24 +16,4 @@ public class CatalogoCorsi {
             System.out.println("----------");
         }
     }
-
-    /* public void modificaCorso(int indice) {
-        if(indice < 0 || indice >= corsi.size()) {
-            System.out.println("Errore. Indice non valido.");
-            System.exit(0);
-        }
-        Scanner tas = new Scanner(System.in);
-        Corso corso = corsi.get(indice);
-        System.out.println("--- Modifica Corso ---");
-        System.out.println("Nome (lascia vuoto per non cambiare): ");
-        String nome = tas.next();
-        if(nome.isEmpty()) { corso.setNome(nome); }
-        System.out.println("Docente (lascia vuoto per non cambiare): ");
-        String docente = tas.next();
-        if(docente.isEmpty()) { corso.setDocente(docente); }
-        System.out.print("Nuova durata (0 per non cambiare): ");
-        int durata = tas.nextInt();
-        if(durata > 0) { corso.setDurataOre(durata); }
-
-    } */
 }

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public abstract class Corso {
     protected String nome;
     protected String docente;
