@@ -65,24 +65,35 @@ public class Demo {
             switch(scelta) {
                 case 1:
                     inserisciDati();
+                    break;
                 case 2:
                     visualizzaDati();
+                    break;
                 case 3:
                     System.out.println("Inserisci numero da cercare: ");
                     double numero = tas.nextDouble();
-                    ricercaDato(numero);
+                    int index = ricercaDato(numero);
+                    if(index != -1) {
+                        System.out.println("Numero presente all'indice " + index);
+                    } else {
+                        System.out.println("Numero non presente nell'ArrayList");
+                    }
+                    break;
                 case 4:
                     System.out.println("Inserisci numero da cercare: ");
                     numero = tas.nextDouble();
                     modificaDato(numero);
+                    break;
                 case 5:
                     System.out.println("5");
+                    break;
                 case 6:
                     // Metodo per ordinare gli array in modo crescente
                     Collections.sort(numList, Comparator.comparing(Double::doubleValue));
                     // Decrescente
                     // Collections.sort(numList, Collections.reverseOrder(Comparator.comparing(Double::doubleValue)));
                     visualizzaDati();
+                    break;
                 case 0:
                     System.out.println("\nProgramma terminato");
                     System.exit(0);
