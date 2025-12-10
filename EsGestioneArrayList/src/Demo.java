@@ -92,7 +92,7 @@ public class Demo {
                     break;
                 case 6:
                     // Metodo per ordinare gli array in modo crescente
-                    Collections.sort(numList, Comparator.comparing(Double::doubleValue));
+                    Collections.sort(numList);
                     // Decrescente
                     // Collections.sort(numList, Collections.reverseOrder(Comparator.comparing(Double::doubleValue)));
                     visualizzaDati();
