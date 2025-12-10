@@ -44,6 +44,7 @@ public class Demo {
         int index = ricercaDato(numero);
         if(index != -1) {
             numList.remove(index);
+            System.out.println("Numero eliminato");
         } else {
             System.out.println("Errore! Numero non presente nell'ArrayList");
         }
@@ -85,7 +86,9 @@ public class Demo {
                     modificaDato(numero);
                     break;
                 case 5:
-                    System.out.println("5");
+                    System.out.println("Inserisci numero da eliminare: ");
+                    numero = tas.nextDouble();
+                    eliminaDato(numero);
                     break;
                 case 6:
                     // Metodo per ordinare gli array in modo crescente
