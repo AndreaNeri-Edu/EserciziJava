@@ -31,4 +31,12 @@ public class RegistroSpedizioni {
             } return codiceMax;
         }
     }
+
+    public double caricoMedioTotale() {
+        if (registro.isEmpty()) { System.out.println("Nessuna spedizione registrata"); return -1; }
+        double somma = 0;
+        for (Spedizione s : registro) {
+            somma += s.getCaricoNetto();
+        } return somma / registro.size();
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Spedizione {
     private Veicolo veicoloAssegnato;
     private String codiceSpedizione;
@@ -21,6 +23,16 @@ public class Spedizione {
     public double getCaricoNetto() { return caricoNetto; }
     public String getDataPartenza() { return dataPartenza; }
 
+    public void leggiInput() {
+        Scanner tas = new Scanner(System.in);
+        System.out.print("Codice spedizione: ");
+        codiceSpedizione = tas.nextLine();
+
+        System.out.print("Carico netto (kg): ");
+        caricoNetto = tas.nextDouble(); tas.nextLine();
+
+        System.out.print("Data partenza: ");
+        dataPartenza = tas.nextLine(); }
 
     public void scriviOutput() {
         System.out.println("Codice spedizione: " + codiceSpedizione);
