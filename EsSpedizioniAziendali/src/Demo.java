@@ -7,7 +7,7 @@ public class Demo {
         int scelta;
 
         do {
-            System.out.println("\n--- MENU ---");
+            System.out.println("\nMENU");
             System.out.println("1. Registra spedizione");
             System.out.println("2. Visualizza spedizioni");
             System.out.println("3. Veicolo più usato");
