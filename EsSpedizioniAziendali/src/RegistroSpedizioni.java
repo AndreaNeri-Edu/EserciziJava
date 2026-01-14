@@ -17,4 +17,12 @@ public class RegistroSpedizioni {
         }
     }
 
+    public String veicoloPiuUsato() {
+        if (registro.isEmpty()) { System.out.println("Nessuna spedizione registrata"); }
+        else {
+            
+        }
+        return "";
+    }
+
 }
