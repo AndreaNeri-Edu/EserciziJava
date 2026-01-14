@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class AssetAziendale {
     private String dataAcquisto;
 
-    public AssetAziendale(String dataAcquisto) {
-        this.dataAcquisto = dataAcquisto;
+    public AssetAziendale(String dataAcquistoNuovo) {
+        this.dataAcquisto = dataAcquistoNuovo;
     }
 
     public void leggiInput() {
