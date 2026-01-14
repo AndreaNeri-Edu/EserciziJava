@@ -31,7 +31,6 @@ public class Spedizione {
     }
 
     public boolean equals(Spedizione altra) {
-        return this.codiceSpedizione.equals(altra.codiceSpedizione) &&
-                this.caricoNetto == altra.caricoNetto;
+        return this.codiceSpedizione.equals(altra.codiceSpedizione) && this.caricoNetto == altra.caricoNetto;
     }
 }
