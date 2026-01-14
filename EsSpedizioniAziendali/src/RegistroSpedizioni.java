@@ -12,7 +12,7 @@ public class RegistroSpedizioni {
         else {
             for (Spedizione spedi : registro) {
                 spedi.scriviOutput();
-                System.out.println("----------------------");
+                System.out.println(" ");
             }
         }
     }
