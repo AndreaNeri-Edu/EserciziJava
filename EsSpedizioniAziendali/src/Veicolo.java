@@ -51,8 +51,7 @@ public class Veicolo extends AssetAziendale {
         if(altro instanceof Veicolo) return false;
         else {
             Veicolo v = (Veicolo) altro;
-            return this.tipo.equals(v.tipo) &&
-                    this.kmSettimanali == v.kmSettimanali;
+            return this.tipo.equals(v.tipo) &&  this.kmSettimanali == v.kmSettimanali;
         }
     }
 }
