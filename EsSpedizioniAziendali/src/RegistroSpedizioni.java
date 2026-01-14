@@ -18,11 +18,17 @@ public class RegistroSpedizioni {
     }
 
     public String veicoloPiuUsato() {
-        if (registro.isEmpty()) { System.out.println("Nessuna spedizione registrata"); }
+        if (registro.isEmpty()) { return "Nessuna spedizione registrata"; }
         else {
-            
+            String codiceMax = "";
+            double maxKm = -1;
+            for (Spedizione spedi : registro) {
+                Veicolo veicolo = spedi.getVeicoloAssegnato();
+                if (veicolo.getKmSettimanali() > maxKm) {
+                    maxKm = veicolo.getKmSettimanali();
+                    codiceMax = veicolo.getCodiceFlotta();
+                }
+            } return codiceMax;
         }
-        return "";
     }
-
 }
