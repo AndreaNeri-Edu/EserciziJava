@@ -12,11 +12,11 @@ public class AgendaStudenti {
                 int ora = tas.nextInt();
 
                 if (ora < 13 || ora > 18) {
-                    throw new OraNonContemplataException("Ora non valida: "+ora);
+                    throw new OraNonContemplataException("Ora non valida");
                 }
                 int indice = ora-13;
                 if (appuntamenti[indice] != null) {
-                    throw new OraOccupataException("L'ora "+ ora +" è già occupata.");
+                    throw new OraOccupataException("L'ora "+ ora +" è già occupata");
                 }
 
                 System.out.print("Descrizione dell'appuntamento: ");
