@@ -1,55 +1,43 @@
 import java.util.Scanner;
 
 public class AgendaStudenti {
-
     public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
-
-        // Array di 6 stringhe per le ore 13–18
+        Scanner tas = new Scanner(System.in);
         String[] appuntamenti = new String[6];
+        int appInseriti=0;
 
-        int inseriti = 0; // conta quanti appuntamenti sono stati inseriti
-
-        while (inseriti < 6) {
+        while (appInseriti<6) {
             try {
                 System.out.print("Inserisci un'ora (13-18): ");
-                int ora = input.nextInt();
-                input.nextLine(); // consuma il newline
+                int ora = tas.nextInt();
 
-                // Controllo ora valida
                 if (ora < 13 || ora > 18) {
-                    throw new OraNonContemplataException("Ora non valida: " + ora);
+                    throw new OraNonContemplataException("Ora non valida: "+ora);
                 }
-
-                int indice = ora - 13;
-
-                // Controllo se slot è già occupato
+                int indice = ora-13;
                 if (appuntamenti[indice] != null) {
-                    throw new OraOccupataException("L'ora " + ora + " è già occupata.");
+                    throw new OraOccupataException("L'ora "+ ora +" è già occupata.");
                 }
 
-                System.out.print("Inserisci la descrizione dell'appuntamento: ");
-                String descrizione = input.nextLine();
+                System.out.print("Descrizione dell'appuntamento: ");
+                tas.nextLine();
+                String descrizione = tas.nextLine();
 
                 appuntamenti[indice] = descrizione;
-                inseriti++;
-
-                System.out.println("Appuntamento inserito correttamente!\n");
+                appInseriti++;
+                System.out.println("Appuntamento inserito correttamente!");
 
             } catch (OraNonContemplataException e) {
-                System.out.println("Errore: " + e.getMessage() + "\n");
+                System.out.println("Errore: " + e.getMessage());
             } catch (OraOccupataException e) {
-                System.out.println("Errore: " + e.getMessage() + "\n");
+                System.out.println("Errore: " + e.getMessage());
             }
         }
+        tas.close();
 
-        input.close();
-
-        // Stampa finale degli appuntamenti
-        System.out.println("\nTutti gli appuntamenti sono stati inseriti:");
-        for (int i = 0; i < appuntamenti.length; i++) {
-            System.out.println((13 + i) + ": " + appuntamenti[i]);
+        System.out.println("Tabella appuntamenti:");
+        for (int i=0; i<appuntamenti.length; i++) {
+            System.out.println((13 + i)+": "+appuntamenti[i]);
         }
     }
 }
