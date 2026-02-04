@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+public static void inserisciRisultato()
+
 public class GestionePartite {
     public static void main(String[] args) {
         Scanner tas = new Scanner(System.in);
