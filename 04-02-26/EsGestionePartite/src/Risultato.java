@@ -34,6 +34,8 @@ public class Risultato {
     }
 
     public int puntiFuori() {
-        
+        if(golFuori>golCasa) return 3;
+        if(golCasa==golFuori) return 1;
+        return 0;
     }
 }
