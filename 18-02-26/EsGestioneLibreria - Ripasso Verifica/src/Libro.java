@@ -20,6 +20,7 @@ public class Libro extends Pubblicazione{
 
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("%s, %s, %s, %s", isbn,getTitolo(),numPagine,disponibile);
+        // return isbn +"; "+ getTitolo()+"; "+numPagine+"; "+disponibile;
     }
 }
