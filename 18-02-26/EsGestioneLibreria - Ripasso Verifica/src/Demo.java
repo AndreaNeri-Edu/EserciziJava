@@ -61,6 +61,7 @@ public class Demo {
 
                 System.out.println("Numero pagine: ");
                 int pagine = tas.nextInt();
+                tas.nextLine();
                 boolean disponibile;
                 while(true) {
                     System.out.println("Disponibile (s/n): ");
@@ -75,7 +76,7 @@ public class Demo {
                     }
                 }
 
-                Libro libro = new Libro(isbn, titolo, pagine, disponibile);
+                Libro libro = new Libro(titolo, isbn, pagine, disponibile);
 
                 PrintWriter pw = new PrintWriter(new FileOutputStream(FILE_NAME, true));
                 pw.println(libro.toString());
@@ -98,7 +99,7 @@ public class Demo {
                 String[] parti = riga.split(";");
                 if(parti.length == 4) {
                     System.out.println("-------------------");
-                    System.out.println("\nISBN: "+parti[0]+"\nTitolo: "+parti[1]+"\nPagine: "+parti[2]+"Disponibile: "+parti[3]);
+                    System.out.println("ISBN: "+parti[0]+"\nTitolo: "+parti[1]+"\nPagine: "+parti[2]+"\nDisponibile: "+parti[3]);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -117,7 +118,7 @@ public class Demo {
                     String riga = fileReader.nextLine();
                     String[] parti = riga.split(";");
                     if(parti[0].equalsIgnoreCase(isbn)) {
-                        System.out.println("\nISBN: "+parti[0]+"\nTitolo: "+parti[1]+"\nPagine: "+parti[2]+"Disponibile: "+parti[3]);
+                        System.out.println("\nISBN: "+parti[0]+"\nTitolo: "+parti[1]+"\nPagine: "+parti[2]+"\nDisponibile: "+parti[3]);
                         trovato = true;
                         break;
                     }
@@ -133,12 +134,14 @@ public class Demo {
 
     public static void modificaDisponibilita() {
         boolean disponibile;
+        boolean trovato = false;
         System.out.println("ISBN: ");
         String isbn = tas.nextLine();
         try {
             validaISBN(isbn);
             File originale = new File(FILE_NAME);
             File temp = new File("temp.txt");
+            PrintWriter pw = new PrintWriter(new FileOutputStream(temp));
             try(Scanner fileReader = new Scanner(originale);) {
                 while(fileReader.hasNextLine()) {
                     String riga = fileReader.nextLine();
@@ -157,14 +160,26 @@ public class Demo {
                                 break;
                             }
                         }
-                    }
+                        pw.println(parti[0]+";"+parti[1]+";"+parti[2]+";"+disponibile);
+                        trovato = true;
+                    }else { pw.println(riga); }
                 }
-
+                pw.close();
+            }
+            if(trovato) {
+                originale.delete();
+                temp.renameTo(originale);
+                System.out.println("Disponibilità aggiornata");
+            }else {
+                temp.delete();
+                System.out.println("Libro non trovato.");
             }
         }catch (LunghezzaISBNException | FormatoISBNException e) {
             System.out.println(e.getMessage());
         }catch (FileNotFoundException e) {
             System.out.println("Errore: file non trovato");
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -172,30 +187,34 @@ public class Demo {
         int numLibri = 0;
         int somma  = 0;
         double media = 0;
-        try(Scanner fileReader = new Scanner(new FileInputStream(FILE_NAME));) {
-            while(fileReader.hasNextLine()) {
-                String riga = fileReader.nextLine();
+        try {
+            Scanner fileReader1 = new Scanner(new FileInputStream(FILE_NAME));
+            while(fileReader1.hasNextLine()) {
+                String riga = fileReader1.nextLine();
                 String[] parti = riga.split(";");
                 somma+= Integer.parseInt(parti[2]);
                 numLibri+=1;
             }
+            fileReader1.close();
 
             if(numLibri == 0) {
                 System.out.println("Errore: non sono presenti libri");
                 return;
             } else {
                 media= (double) somma/numLibri;
+                System.out.println("Media pagine: "+media);
             }
 
-            while(fileReader.hasNextLine()) {
-                String riga = fileReader.nextLine();
+            Scanner fileReader2 = new Scanner(new FileInputStream(FILE_NAME));
+            while(fileReader2.hasNextLine()) {
+                String riga = fileReader2.nextLine();
                 String[] parti = riga.split(";");
                 int pag = Integer.parseInt(parti[2]);
-                System.out.println("Libro"+parti[1]+": ");
-                if(pag > media) { System.out.println("Libro "+parti[1]+" superiore alla media"); }
-                else if(pag < media) { System.out.println("Libro "+parti[1]+" inferiore alla media"); }
-                else { System.out.println("Libro "+parti[1]+" uguale alla media"); }
+                if(pag > media) { System.out.println("Libro '"+parti[1]+"' superiore alla media"); }
+                else if(pag < media) { System.out.println("Libro '"+parti[1]+"' inferiore alla media"); }
+                else { System.out.println("Libro '"+parti[1]+"' uguale alla media"); }
             }
+            fileReader2.close();
         }catch (FileNotFoundException e) {
             System.out.println("Errore: file non trovato");
         }
