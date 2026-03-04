@@ -11,7 +11,7 @@ public class Demo {
         while(true) {
             System.out.println("\nMenu");
             System.out.println("1.Aggiungi scuderia\n2.Aggiugi pilota\n3.Conta piloti di una scuderia");
-            System.out.println("4.Cerca pilota più giovane di una scuderia\n5.Termina");
+            System.out.println("4.Cerca pilota più giovane di una scuderia\n5.Modifica scuderia pilota\n6.Termina");
             System.out.println("Scelta: ");
 
             int scelta = tas.nextInt();
@@ -31,6 +31,9 @@ public class Demo {
                     pilotaPiuGiovane();
                     break;
                 case 5:
+                    modifica();
+                    break;
+                case 6:
                     System.exit(0);
                 default:
                     System.out.println("Errore: Comando non valido");
@@ -170,7 +173,7 @@ public class Demo {
 
                 System.out.println("La scuderia "+nomeCercato+" ha "+contatore+" piloti.");
             } else {
-                System.out.println("Errore: La scuderia"+nomeCercato+" non esiste.");
+                System.out.println("Errore: La scuderia "+nomeCercato+" non esiste.");
             }
 
         } catch (FileNotFoundException e) {
@@ -222,10 +225,74 @@ public class Demo {
                 }
 
             } else {
-                System.out.println("Errore: La scuderia"+nomeCercato+" non esiste");
+                System.out.println("Errore: La scuderia "+nomeCercato+" non esiste");
             }
         } catch (FileNotFoundException e){
             System.out.println("Errore: file pilota o scuderie non trovato");
+        }
+    }
+
+    public static void modifica() {
+        System.out.println("Inserisci codice pilota da modificare: ");
+        String codP = tas.nextLine();
+
+        try {
+            boolean pilotaTrovato = false;
+            Scanner s = new Scanner(new File(FILE_PILOTI));
+            while (s.hasNextLine()) {
+                String riga = s.nextLine();
+                String[] parti = riga.split(";");
+                if (parti[0].equalsIgnoreCase(codP)) {
+                    System.out.println("Codice scuderia attuale: "+parti[4]);
+                    pilotaTrovato = true;
+                }
+            }
+            s.close();
+
+            if (pilotaTrovato) {
+                System.out.println("Inserisci il codice della nuova scuderia: ");
+                String scuderia = tas.nextLine();
+                boolean scuderiaEsiste = false;
+                Scanner Scanner = new Scanner(new File(FILE_SCUDERIE));
+                while (Scanner.hasNextLine()) {
+                    if (Scanner.nextLine().split(";")[0].equalsIgnoreCase(scuderia)) {
+                        scuderiaEsiste = true;
+                    }
+                }
+                Scanner.close();
+
+                if (scuderiaEsiste) {
+                    File piloti = new File(FILE_PILOTI);
+                    File temp = new File("temp.txt");
+
+                    Scanner scanner = new Scanner(piloti);
+                    PrintWriter pw = new PrintWriter(temp);
+
+                    while (scanner.hasNextLine()) {
+                        String riga = scanner.nextLine();
+                        String[] parti = riga.split(";");
+
+                        if (parti[0].equalsIgnoreCase(codP)) {
+                            pw.println(parti[0] + ";" + parti[1] + ";" + parti[2] + ";" + parti[3] + ";" + scuderia);
+                        } else {
+                            pw.println(riga);
+                        }
+                    }
+                    scanner.close();
+                    pw.close();
+
+                    piloti.delete();
+                    temp.renameTo(piloti);
+                    System.out.println("Pilota aggiornato");
+
+                } else {
+                    System.out.println("Errore: La scuderia "+scuderia+" non esiste.");
+                }
+            } else {
+                System.out.println("Errore: Il pilota "+codP+" non esiste.");
+            }
+        } catch (IOException e) {
+            System.out.println("Errore durante la modifica.");
         }
     }
 
