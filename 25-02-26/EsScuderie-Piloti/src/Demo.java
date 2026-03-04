@@ -10,8 +10,9 @@ public class Demo {
     public static void main(String[] args) {
         while(true) {
             System.out.println("\nMenu");
-            System.out.println("1.Aggiungi scuderia\n2.Aggiugi pilota\n3.Conta piloti di una scuderia\n4.facoltativo");
-
+            System.out.println("1.Aggiungi scuderia\n2.Aggiugi pilota\n3.Conta piloti di una scuderia");
+            System.out.println("4.Cerca pilota più giovane di una scuderia\n5.Termina");
+            System.out.println("Scelta: ");
 
             int scelta = tas.nextInt();
             tas.nextLine();
@@ -24,8 +25,10 @@ public class Demo {
                     aggiungiPilota();
                     break;
                 case 3:
+                    contaPiloti();
                     break;
                 case 4:
+                    pilotaPiuGiovane();
                     break;
                 case 5:
                     System.exit(0);
@@ -95,7 +98,9 @@ public class Demo {
         String codS = tas.nextLine();
 
         try {
+            PrintWriter pw = new PrintWriter(new FileOutputStream(FILE_PILOTI, true));
             boolean scuderiaEsiste = false;
+
             Scanner s = new Scanner(new File(FILE_SCUDERIE));
             while (s.hasNextLine()) {
                 String riga = s.nextLine();
@@ -107,7 +112,6 @@ public class Demo {
             s.close();
 
             if (scuderiaEsiste) {
-                PrintWriter pw = new PrintWriter(new FileOutputStream(FILE_PILOTI, true));
                 System.out.println("Codice pilota: ");
                 String codP = tas.nextLine();
                 validaCodicePilota(codP);
@@ -135,46 +139,93 @@ public class Demo {
     }
 
     public static void contaPiloti() {
-        System.out.println("Inserisci il NOME della scuderia: ");
+        System.out.println("Inserisci il nome della scuderia: ");
         String nomeCercato = tas.nextLine();
 
         try {
             String codiceTrovato = null;
-            Scanner sScu = new Scanner(new File(FILE_SCUDERIE));
+            Scanner scannerScuderie = new Scanner(new File(FILE_SCUDERIE));
 
-            while (sScu.hasNextLine()) {
-                String riga = sScu.nextLine();
+            while (scannerScuderie.hasNextLine()) {
+                String riga = scannerScuderie.nextLine();
                 String[] parti = riga.split(";");
                 if (parti[1].equalsIgnoreCase(nomeCercato)) {
                     codiceTrovato = parti[0];
                 }
             }
-            sScu.close();
+            scannerScuderie.close();
 
             if (codiceTrovato != null) {
                 int contatore = 0;
-                Scanner sPil = new Scanner(new File(FILE_PILOTI));
+                Scanner scannerPiloti = new Scanner(new File(FILE_PILOTI));
 
-                while (sPil.hasNextLine()) {
-                    String riga = sPil.nextLine();
+                while (scannerPiloti.hasNextLine()) {
+                    String riga = scannerPiloti.nextLine();
                     String[] parti = riga.split(";");
-                    // Il codice scuderia nel file piloti è all'ultima posizione (parti[4])
                     if (parti[4].equalsIgnoreCase(codiceTrovato)) {
                         contatore++;
                     }
                 }
-                sPil.close();
+                scannerPiloti.close();
 
-                System.out.println("La scuderia " + nomeCercato + " ha " + contatore + " piloti.");
+                System.out.println("La scuderia "+nomeCercato+" ha "+contatore+" piloti.");
             } else {
-                // Se il codiceTrovato è rimasto null
-                System.out.println("Errore: La scuderia '" + nomeCercato + "' non esiste.");
+                System.out.println("Errore: La scuderia"+nomeCercato+" non esiste.");
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Errore: Uno dei file non è stato trovato.");
-        } catch (IOException e) {
-            System.out.println("Errore di lettura.");
+            System.out.println("Errore: file pilota o scuderie non trovato");
+        }
+    }
+
+    public static void pilotaPiuGiovane() {
+        System.out.println("Inserisci il nome della scuderia: ");
+        String nomeCercato = tas.nextLine();
+        try {
+            String codiceTrovato = null;
+            Scanner scannerScuderie = new Scanner(new File(FILE_SCUDERIE));
+
+            while (scannerScuderie.hasNextLine()) {
+                String riga = scannerScuderie.nextLine();
+                String[] parti = riga.split(";");
+                if (parti[1].equalsIgnoreCase(nomeCercato)) {
+                    codiceTrovato = parti[0];
+                }
+            }
+            scannerScuderie.close();
+
+            if (codiceTrovato != null) {
+                String nomeGiovane = "";
+                String cognomeGiovane = "";
+                int etaMinima = 1000;
+
+                Scanner scannerPiloti = new Scanner(new File(FILE_PILOTI));
+                while (scannerPiloti.hasNextLine()) {
+                    String riga = scannerPiloti.nextLine();
+                    String[] parti = riga.split(";");
+                    if (parti[4].equalsIgnoreCase(codiceTrovato)) {
+                        int etaAttuale = Integer.parseInt(parti[3]);
+
+                        if (etaAttuale < etaMinima) {
+                            etaMinima = etaAttuale;
+                            nomeGiovane = parti[1];
+                            cognomeGiovane = parti[2];
+                        }
+                    }
+                }
+                scannerPiloti.close();
+
+                if (!nomeGiovane.equals("")) {
+                    System.out.println("Pilota più giovane: "+nomeGiovane+" "+cognomeGiovane+" ("+etaMinima+" anni).");
+                } else {
+                    System.out.println("Errore: la scuderia non ha piloti");
+                }
+
+            } else {
+                System.out.println("Errore: La scuderia"+nomeCercato+" non esiste");
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("Errore: file pilota o scuderie non trovato");
         }
     }
 
