@@ -8,7 +8,7 @@ public class Conferenza extends Evento {
     }
 
     public void setRelatore(String relatore) { this.relatore = relatore; }
-    public String getRelatore() { return this.relatore; }
+    public String getRelatore() { return relatore; }
 
     @Override
     public String toString() {

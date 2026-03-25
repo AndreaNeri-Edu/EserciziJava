@@ -16,6 +16,6 @@ public class NodoListaEvento {
     public void setEvento(Evento evento) { this.evento = evento; }
     public void setSuccessivo(NodoListaEvento successivo) { this.successivo = successivo; }
 
-    public Evento getEvento() { return this.evento; }
-    public NodoListaEvento getSuccessivo() { return this.successivo; }
+    public Evento getEvento() { return evento; }
+    public NodoListaEvento getSuccessivo() { return successivo; }
 }
