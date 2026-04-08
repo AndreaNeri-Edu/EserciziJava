@@ -20,6 +20,7 @@ public class Veicolo extends AssetAziendale {
     public void leggiInput() {
         Scanner tas = new Scanner(System.in);
         super.leggiInput();
+<<<<<<< Updated upstream:Vecchio/EsSpedizioniAziendali/src/Veicolo.java
         System.out.print("Targa: ");
         targa = tas.nextLine();
         System.out.print("Marca: ");
@@ -29,17 +30,33 @@ public class Veicolo extends AssetAziendale {
         System.out.print("Tipo veicolo: ");
         tipo = tas.nextLine();
         System.out.print("Chilometri percorsi settimanali: ");
+=======
+
+        System.out.print("targa: ");
+        targa = tas.nextLine();
+
+        System.out.print("marca: ");
+        marca = tas.nextLine();
+
+        System.out.print("codice Identificativo Flotta: ");
+        codiceFlotta = tas.nextLine();
+
+        System.out.print("tipo veicolo: ");
+        tipo = tas.nextLine();
+
+        System.out.print("chilometri percorsi settimanali: ");
+>>>>>>> Stashed changes:EsSpedizioniAziendali/src/Veicolo.java
         kmSettimanali = tas.nextDouble();
     }
 
     @Override
     public void scriviOutput() {
         super.scriviOutput();
-        System.out.println("Targa: " + targa);
-        System.out.println("Marca: " + marca);
-        System.out.println("Codice Flotta: " + codiceFlotta);
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Km settimanali: " + kmSettimanali);
+        System.out.println("targa: " + targa);
+        System.out.println("marca: " + marca);
+        System.out.println("codice Flotta: " + codiceFlotta);
+        System.out.println("tipo: " + tipo);
+        System.out.println("km settimanali: " + kmSettimanali);
     }
 
     public String getCodiceFlotta() { return codiceFlotta; }
