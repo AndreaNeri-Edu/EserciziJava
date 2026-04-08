@@ -7,7 +7,11 @@ public class Demo {
         int scelta;
 
         do {
+<<<<<<< Updated upstream:Vecchio/EsSpedizioniAziendali/src/Demo.java
             System.out.println("\nMENU");
+=======
+            System.out.println("\n--- MENU ---");
+>>>>>>> Stashed changes:EsSpedizioniAziendali/src/Demo.java
             System.out.println("1. Registra spedizione");
             System.out.println("2. Visualizza spedizioni");
             System.out.println("3. Veicolo più usato");
@@ -48,4 +52,8 @@ public class Demo {
 
         System.out.println("Programma terminato.");
     }
+<<<<<<< Updated upstream:Vecchio/EsSpedizioniAziendali/src/Demo.java
 }
+=======
+}
+>>>>>>> Stashed changes:EsSpedizioniAziendali/src/Demo.java
