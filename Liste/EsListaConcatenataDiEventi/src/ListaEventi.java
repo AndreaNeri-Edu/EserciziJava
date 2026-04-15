@@ -52,7 +52,7 @@ public class ListaEventi {
     public boolean rimuoviEvento(String titolo) {
         Evento evento = cercaEvento(titolo);
         if(evento != null) {
-            if(testa.getEvento() == evento) { testa = testa.getSuccessivo(); }
+            if(testa.getEvento() == evento) { testa = testa.getSuccessivo(); return true;}
 
             NodoListaEvento precedente = testa;
             while (precedente.getSuccessivo() != null) {
@@ -60,9 +60,9 @@ public class ListaEventi {
                     precedente.setSuccessivo(precedente.getSuccessivo().getSuccessivo());
                     return true;
                 }
+                precedente = precedente.getSuccessivo();
             }
-            precedente = precedente.getSuccessivo();
-            return true;
+            return false;
         } else {
             System.out.println("Errore: evento non trovato");
             return false;
