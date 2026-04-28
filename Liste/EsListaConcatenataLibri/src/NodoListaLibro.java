@@ -2,10 +2,7 @@ public class NodoListaLibro {
     private Libro libro;
     private NodoListaLibro successivo;
 
-    public NodoListaLibro() {
-        this.libro = null;
-        this.successivo = null;
-    }
+    public NodoListaLibro() { this.libro = null; this.successivo = null; }
 
     public NodoListaLibro(Libro libro, NodoListaLibro successivo) {
         this.libro = libro;

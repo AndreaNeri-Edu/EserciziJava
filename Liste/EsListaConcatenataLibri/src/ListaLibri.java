@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.io.*;
+
 public class ListaLibri {
     private NodoListaLibro testa;
 
@@ -63,8 +66,10 @@ public class ListaLibri {
 
     public void visualizzaLibriDisponibili() {
         NodoListaLibro puntatore = testa;
-        while (puntatore != null && puntatore.getLibro().getDisponibile()) {
-            System.out.println(puntatore.getLibro().toString());
+        while (puntatore != null) {
+            if(puntatore.getLibro().getDisponibile()) {
+                System.out.println(puntatore.getLibro().toString());
+            }
             puntatore = puntatore.getSuccessivo();
         }
     }
